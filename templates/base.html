@@ -1,0 +1,28 @@
+{% load static %}<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gestiontienda{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  {% include 'partials/navbar.html' %}
+  <div class="grid-x">
+    <aside class="cell medium-2">{% include 'partials/sidebar.html' %}</aside>
+    <main class="cell medium-10 grid-container">
+      {% include 'partials/mensajes.html' %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <script src="{% static 'js/vendor/jquery.js' %}"></script>
+  <script src="{% static 'js/vendor/what-input.js' %}"></script>
+  <script src="{% static 'js/vendor/foundation.min.js' %}"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

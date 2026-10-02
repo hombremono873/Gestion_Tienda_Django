@@ -1,0 +1,27 @@
+# Entorno virtual
+.venv/
+venv/
+
+# Secretos
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Django
+db.sqlite3
+staticfiles/
+media/*
+!media/productos/
+media/productos/*
+!media/productos/.gitkeep
+
+# Editores / SO
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Secretos de acceso a la base de datos
+secretos/*
