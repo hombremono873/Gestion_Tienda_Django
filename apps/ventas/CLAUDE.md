@@ -25,7 +25,8 @@
 * siguiente_numero(prefijo): select_for_update + 1, dentro de la transacción del llamador.
 * registrar_venta(): atómico. Locks: turno → productos por id → consecutivos (V, FV, RC). Crea venta, detalles, pago, factura, SALIDAs.
 * anular_venta(): solo ADMIN. ADMIN elige turno ABIERTO del que sale el efectivo devuelto (P1); sin turno abierto no se anula. Locks: turno → venta → productos por id. Venta y factura ANULADA + ENTRADA/ANULACION.
-* exceptions.py: StockInsuficiente, TurnoCerrado, VentaYaAnulada, EfectivoInsuficiente.
+* exceptions.py: StockInsuficiente, TurnoCerrado, VentaYaAnulada, EfectivoInsuficiente, VendedorEsCliente.
+* Regla (2026-10-05): un empleado puede comprar (Cliente sin cuenta, P3) pero NO venderse a sí mismo. En registrar_venta(): si (cliente.tipo_documento, cliente.numero_documento) == (empleado.usuario.tipo_documento, empleado.usuario.documento) → VendedorEsCliente; otro empleado registra la venta. Solo en servicio (cruza tablas, sin constraint de BD). Falta prueba en Doc 6.
 
 ## Punto de venta (P2 decidido)
 * Carrito en la sesión de Django; cada acción (agregar, quitar, corregir, cliente) = POST + recarga.

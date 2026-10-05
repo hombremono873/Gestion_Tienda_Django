@@ -1,12 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from apps.empleados.models import Cargo
 
 from .models import Usuario
 
-"""Registro del modelo Cargo """
-admin.site.register(Cargo)
 
 @admin.register(Usuario)
 class UsuarioAdmin(UserAdmin):

@@ -1,13 +1,12 @@
 # app empleados
 > Fuente: Documento 4 (BD) v1.0 + decisiones 2026-10-01. Al escribir models.py, el código pasa a ser la verdad: dejar aquí solo reglas no obvias.
 
-## Cargo — cargos (fase 2)
-* nombre CharField(80) UK · salario_base Dec(12,2) CHECK ≥0 · descripcion Text null.
-
-## Empleado — empleados (fase 3)
-* usuario OneToOne(Usuario, PROTECT) — rol EMPLEADO o ADMIN.
-* cargo FK(Cargo, PROTECT) · fecha_ingreso Date · salario Dec CHECK ≥0 (puede ≠ salario_base).
-* estado CHECK ACTIVO/RETIRADO.
+## Cargo — cargos — IMPLEMENTADO en models.py (2026-10-05)
+## Empleado — empleados — IMPLEMENTADO en models.py (2026-10-05)
+* Decisión propia (Doc 4 v1.1): 7 estados ACTIVO, INACTIVO, VACACIONES, LICENCIA, PERMISO, RETIRADO, SUSPENDIDO; max_length 15.
+* fecha_ingreso: default=timezone.localdate (editable). NUNCA auto_now_add: es dato del negocio.
+* salario puede ≠ Cargo.salario_base.
+* Pendiente definir: qué estados permiten trabajar (¿abrir turno solo ACTIVO?) y relación RETIRADO ↔ Usuario.is_active.
 
 ## PagoSalario — pagos_salario (fase 9)
 * empleado FK(Empleado, PROTECT) · periodo_inicio, periodo_fin Date CHECK fin ≥ inicio.
