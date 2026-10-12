@@ -2,20 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.core.validators import RegexValidator
 
-# Create your models here.
+from apps.core.constantes import Rol, TipoDocumento
 
-CHOICES = (
-    ('CC', 'Cédula de Ciudadanía'),
-    ('TI', 'Tarjeta de Identidad'),
-    ('NIT', 'Número de Identificación Tributaria'),
-    ('PP', 'Pasaporte'),
-    ('CE', 'Cédula de Extranjería')
-)
-ROLES = [
-    ("ADMIN", "Administrador"),
-    ("EMPLEADO", "Empleado"),
-    ("CLIENTE", "Cliente"),
-]
+# Create your models here.
 
 """
 Clase Meta del modelo Usuario (va dentro de la clase, al final).
@@ -55,7 +44,7 @@ class UsuarioManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('rol', 'ADMIN')  # el superusuario es ADMIN (Documento 1)
+        extra_fields.setdefault('rol', Rol.ADMIN)  # el superusuario es ADMIN (Documento 1)
         return self._create_user(email, password, **extra_fields)
 
 
@@ -66,8 +55,8 @@ class Usuario(AbstractUser):
     telefono=models.CharField("telefono", max_length=20, blank=True)
     documento=models.CharField("documento", max_length=20,
                                validators=[RegexValidator(r'^\d+$', 'Solo dígitos.')])
-    tipo_documento=models.CharField("tipo", max_length=3, choices=CHOICES, default="CC")
-    rol = models.CharField("rol", max_length=10, choices=ROLES, default="CLIENTE")
+    tipo_documento=models.CharField("tipo", max_length=3, choices=TipoDocumento.choices, default=TipoDocumento.CC)
+    rol = models.CharField("rol", max_length=10, choices=Rol.choices, default=Rol.CLIENTE)
     email=models.EmailField("correo", max_length=254, unique=True)
 
     USERNAME_FIELD = 'email'
@@ -88,11 +77,11 @@ class Usuario(AbstractUser):
                 name='usuarios_documento_unico',
             ),
             models.CheckConstraint(
-                condition=models.Q(tipo_documento__in=['CC', 'CE', 'TI', 'NIT', 'PP']),
+                condition=models.Q(tipo_documento__in=TipoDocumento.values),
                 name='usuarios_tipo_documento_valido',
             ),
             models.CheckConstraint(
-                condition=models.Q(rol__in=['ADMIN', 'EMPLEADO', 'CLIENTE']),
+                condition=models.Q(rol__in=Rol.values),
                 name='usuarios_rol_valido',
             ),
         ]

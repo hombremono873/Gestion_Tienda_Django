@@ -17,6 +17,7 @@
 
 ## Pendiente
 * ¿Registrar compra actualiza precio_compra?
+* (2026-10-07) Crear función que genere automáticamente `codigo` del producto (definir formato al implementarla).
 
 ## Plantillas
 producto_lista, producto_form, producto_detalle, categoria_lista, catalogo.

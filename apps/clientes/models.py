@@ -1,19 +1,14 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import RegexValidator
+
+from apps.core.constantes import TipoDocumento
 # Create your models here.
 
-CHOICES = (
-    ("CC", "CC"),
-    ("CE", "CE"),
-    ("TI", "TI"),
-    ("NIT", "NIT"),
-    ("PP", "PP")
-)
 class Cliente(models.Model):
     usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     nombre = models.CharField("Nombre del cliente", max_length=150)
-    tipo_documento = models.CharField("Tipo de documento", max_length=3, choices=CHOICES, default = "CC")
+    tipo_documento = models.CharField("Tipo de documento", max_length=3, choices=TipoDocumento.choices, default=TipoDocumento.CC)
     numero_documento = models.CharField("Número de documento", max_length=20,
                                         validators=[RegexValidator(r'^\d+$', 'Solo dígitos.')])
     telefono = models.CharField("Teléfono del cliente", max_length=20, blank=True)
@@ -32,7 +27,7 @@ class Cliente(models.Model):
                 violation_error_message="Ya existe un cliente con ese tipo y número de documento"
             ),
             models.CheckConstraint(
-                condition=models.Q(tipo_documento__in=["CC", "CE", "TI", "NIT", "PP"]),
+                condition=models.Q(tipo_documento__in=TipoDocumento.values),
                 name="clientes_tipo_documento_valido",
                 violation_error_message="El tipo de documento no es válido"
             ),

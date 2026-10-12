@@ -2,6 +2,8 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+from apps.core.constantes import EstadoEmpleado
+
 
 class Cargo(models.Model):
     """Puesto de trabajo con su salario de referencia."""
@@ -36,16 +38,6 @@ Propósito: Evitar inconsistencias y registros huérfanos en la base de datos;
 lanza un error si se intenta borrar un elemento que aún tiene dependencias activas.
 """
 
-ESTADOS = [
-    ("ACTIVO", "Activo"),
-    ("INACTIVO", "Inactivo"),
-    ("VACACIONES", "Vacaciones"),
-    ("LICENCIA", "Licencia"),
-    ("PERMISO", "Permiso"),
-    ("RETIRADO", "Retirado"),
-    ("SUSPENDIDO", "Suspendido"),
-]
-
 
 class Empleado(models.Model):
     """Persona que trabaja en la tienda, enlazada a una cuenta de usuario."""
@@ -58,8 +50,8 @@ class Empleado(models.Model):
     estado = models.CharField(
         "Estado del empleado",
         max_length=15,
-        choices=ESTADOS,
-        default="ACTIVO",
+        choices=EstadoEmpleado.choices,
+        default=EstadoEmpleado.ACTIVO,
     )
 
     class Meta:
@@ -73,10 +65,11 @@ class Empleado(models.Model):
                 violation_error_message="El salario no puede ser negativo",
             ),
             models.CheckConstraint(
-                condition=models.Q(estado__in=[valor for valor, _ in ESTADOS]),
+                condition=models.Q(estado__in=EstadoEmpleado.values),
                 name="estado_empleado_valido",
                 violation_error_message="El estado del empleado no es válido",
             ),
+            
         ]
 
     def __str__(self):
