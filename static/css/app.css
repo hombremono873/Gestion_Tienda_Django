@@ -1,0 +1,30 @@
+/* Estilos propios de TiendaGest (complementan a Bootstrap 5). */
+
+body { background: #f3f7fc; color: #1f2d3d; }
+
+/* Marca y usuario en la barra */
+.marca-logo, .avatar {
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 700;
+}
+.marca-logo { width: 2.3rem; height: 2.3rem; border-radius: .6rem; background: var(--bs-primary); color: #fff; }
+.avatar { width: 2rem; height: 2rem; border-radius: 50%; background: #e1ecf7; color: var(--bs-primary); }
+
+/* Menú lateral */
+.sidebar { width: 240px; flex-shrink: 0; }
+
+/* Bienvenida */
+.hero { background: #fff; padding: 3rem 0 4rem; }
+
+/* Sección con fondo azul claro inclinado (como la referencia) */
+.seccion-inclinada {
+  background: linear-gradient(174deg, #fff 0 18%, #e8f0fa 18.2% 100%);
+}
+
+/* Tarjetas de datos */
+.tarjeta { border-radius: 1rem; transition: transform .2s, box-shadow .2s; }
+.tarjeta:hover { transform: translateY(-4px); box-shadow: 0 .75rem 1.5rem rgba(31, 45, 61, .1) !important; }
+.icono-circulo {
+  width: 3.5rem; height: 3.5rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #e1ecf7; color: var(--bs-primary); font-size: 1.5rem;
+}

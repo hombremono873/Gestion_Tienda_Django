@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container text-center py-5">
+    <span class="badge rounded-pill text-bg-light border text-primary mb-3 px-3 py-2">
+      <i class="bi bi-shop"></i> Tienda de barrio
+    </span>
+    <h1 class="display-4 fw-bold mb-3">Tu tienda de barrio, ahora en línea</h1>
+    <p class="lead text-secondary mb-4">Productos de calidad, precios justos y atención cercana.</p>
+    {% if not user.is_authenticated %}
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="{% url 'usuarios:registro' %}" class="btn btn-primary btn-lg px-4">Crear mi cuenta</a>
+        <a href="#datos" class="btn btn-outline-secondary btn-lg px-4">Contáctanos</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="seccion-inclinada py-5" id="datos">
+  <div class="container">
+    <h2 class="h3 fw-bold text-center mb-4">Datos de la tienda</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card tarjeta h-100 border-0 shadow-sm text-center p-4">
+          <div class="icono-circulo mx-auto mb-3"><i class="bi bi-geo-alt"></i></div>
+          <h3 class="h6 fw-bold text-uppercase text-primary">Dirección</h3>
+          <p class="mb-0 text-secondary">Calle 00 # 00-00, Bogotá</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card tarjeta h-100 border-0 shadow-sm text-center p-4">
+          <div class="icono-circulo mx-auto mb-3"><i class="bi bi-clock"></i></div>
+          <h3 class="h6 fw-bold text-uppercase text-primary">Horario</h3>
+          <p class="mb-0 text-secondary">Lun – Sáb<br>7:00 a. m. – 8:00 p. m.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card tarjeta h-100 border-0 shadow-sm text-center p-4">
+          <div class="icono-circulo mx-auto mb-3"><i class="bi bi-telephone"></i></div>
+          <h3 class="h6 fw-bold text-uppercase text-primary">Teléfono</h3>
+          <p class="mb-0 text-secondary">300 000 0000</p>
+        </div>
+      </div>
+    </div>
+
+    {% if not user.is_authenticated %}
+      <div class="card border-0 shadow mt-5">
+        <div class="card-body p-4 p-md-5 d-md-flex align-items-center justify-content-between gap-4">
+          <div>
+            <h2 class="h3 fw-bold">¿Aún no tienes cuenta?</h2>
+            <p class="text-secondary mb-md-0">Regístrate y consulta tus compras y facturas cuando quieras.</p>
+          </div>
+          <a href="{% url 'usuarios:registro' %}" class="btn btn-primary btn-lg px-4 text-nowrap">
+            Registrarme <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

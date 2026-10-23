@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md bg-white shadow-sm py-3 sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="{% url 'core:inicio' %}">
+      <span class="marca-logo">T</span> TiendaGest
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal"
+            aria-controls="menu-principal" aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu-principal">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link px-3" href="{% url 'core:inicio' %}">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="{% url 'core:inicio' %}#datos">Contacto</a></li>
+      </ul>
+
+      {% if user.is_authenticated %}
+        <div class="dropdown">
+          <button class="btn d-flex align-items-center gap-2 fw-semibold dropdown-toggle" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar">{{ user.first_name|first|upper|default:"U" }}</span>
+            {{ user.get_full_name|default:user.email }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <li>
+              <form method="post" action="{% url 'usuarios:salir' %}">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item">
+                  <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+                </button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      {% else %}
+        <div class="d-flex gap-2">
+          <a href="{% url 'usuarios:login' %}" class="btn btn-outline-primary px-4">Iniciar sesión</a>
+          <a href="{% url 'usuarios:registro' %}" class="btn btn-primary px-4">Crear cuenta</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</nav>

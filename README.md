@@ -1,6 +1,6 @@
 # Gestiontienda
 
-Sistema de gestión de tienda (ventas, inventario, caja, proveedores, empleados) con Django y Foundation.
+Sistema de gestión de tienda (ventas, inventario, caja, proveedores, empleados) con Django y Bootstrap 5.
 
 ## Puesta en marcha
 
@@ -18,5 +18,5 @@ python manage.py runserver
 - `config/` — configuración del proyecto (settings, urls, wsgi, asgi)
 - `apps/` — una app por dominio: core, usuarios, clientes, empleados, productos, inventario, proveedores, ventas, caja, reportes
 - `templates/` — `base.html`, parciales y una carpeta por app
-- `static/` — Foundation, jQuery, estilos y JS propios
+- `static/` — Bootstrap 5 y Bootstrap Icons (`vendor/`), estilos y JS propios
 - `media/` — archivos subidos (imágenes de productos)
