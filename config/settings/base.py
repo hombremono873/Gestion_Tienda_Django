@@ -113,3 +113,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Archivos subidos por los usuarios (imágenes de productos)
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Autenticación: a dónde va quien no tiene sesión y a dónde vuelve al salir
+LOGIN_URL = "usuarios:login"
+LOGOUT_REDIRECT_URL = "core:inicio"

@@ -6,6 +6,7 @@ from apps.core.constantes import ClasificacionIVA, TarifaIVA
 class Categoria(models.Model):
     nombre = models.CharField("Nombre de la categoría", max_length=100, unique=True)
     descripcion = models.TextField("Descripción de la categoria", blank = True)
+    activo = models.BooleanField("Activo", default = True)
 
     class Meta:
         db_table = "categorias"

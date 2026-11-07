@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+   Panel de administración
+{% endblock %}
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="mb-4">
+    <span class="badge rounded-pill text-bg-primary mb-2">Administrador</span>
+    <h1 class="h2 fw-bold mb-1">Hola, {{ user.first_name|default:user.email }}</h1>
+    <p class="text-secondary mb-0">Elige el módulo con el que quieres trabajar.</p>
+  </div>
+
+  {% include "partials/tarjetas_modulos.html" %}
+</div>
+{% endblock %}
