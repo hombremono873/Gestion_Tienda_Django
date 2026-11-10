@@ -8,6 +8,6 @@ class ProveedorForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Proveedor
         fields = ["nit", "razon_social", "contacto", "telefono", "direccion"]
-        default_widgets = {
+        widgets = {
               "nit": forms.TextInput(attrs={"placeholder": "Ej: 900123456-7"}),
         }

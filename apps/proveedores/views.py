@@ -45,7 +45,7 @@ class ProveedorUpdateView(RolRequeridoMixins, SuccessMessageMixin, UpdateView):
 # 5. messages.success() guarda el mensaje que se mostrará en la siguiente página.
 # 6. redirect() vuelve a la lista de proveedores, donde aparece el mensaje.
 
-class ProveedorDeactivateView(RolRequeridoMixins, SuccessMessageMixin, SingleObjectMixin, View):
+class ProveedorDeactivateView(RolRequeridoMixins, SingleObjectMixin, View):
     """ Vista para activar o desactivar un proveedor (borrado lógico RN-16). Solo acepta  POST"""  
     model = Proveedor
     roles_permitidos = [Rol.ADMIN]

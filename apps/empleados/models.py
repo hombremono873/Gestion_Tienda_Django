@@ -11,7 +11,7 @@ class Cargo(models.Model):
     nombre = models.CharField("Nombre del cargo", max_length=80, unique=True)
     salario_base = models.DecimalField("Salario base", max_digits=12, decimal_places=2)
     descripcion = models.TextField("Descripción del cargo", blank=True)
-
+    activo = models.BooleanField("Activo", default=True)
     class Meta:
         db_table = "cargos"
         verbose_name = "Cargo"
